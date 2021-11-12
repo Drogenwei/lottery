@@ -17,10 +17,14 @@ package cmd
 
 import (
 	"fmt"
-	"lottery/controllers"
-
 	"github.com/spf13/cobra"
+	"lottery/common/helpers"
+	"lottery/controllers"
 )
+
+var title = "双色球推荐"
+
+var ding_url = "https://oapi.dingtalk.com/robot/send?access_token=e0716e0566710767aeb1944a20e5cd1198493a340aac3d3bc4de8dddbd01188d&sign="
 
 // tuiCmd represents the tui command
 var tuiCmd = &cobra.Command{
@@ -33,7 +37,12 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println(controllers.DoubleColor())
+		str := controllers.DoubleColor()
+		fmt.Println(str)
+		// 组装钉钉消息
+		ding_info := helpers.AssemblyDing(title, str)
+		// 发送
+		helpers.SendPost(ding_url, ding_info)
 	},
 }
 

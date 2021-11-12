@@ -16,10 +16,10 @@ limitations under the License.
 package cmd
 
 import (
-	"fmt"
 	"github.com/spf13/cobra"
-	"lottery/common/helpers"
+	"lottery/controllers"
 )
+
 
 // doubleColorCmd represents the doubleColor command
 var doubleColorCmd = &cobra.Command{
@@ -32,8 +32,7 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		url := "https://zst.cjcp.com.cn/cjwssq/view/hong_zonghe_content.html"
-		fmt.Println(helpers.Get(url))
+		controllers.Run()
 	},
 }
 
